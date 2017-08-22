@@ -1,5 +1,6 @@
 import React from 'react'
 import defaultPage from '../hocs/defaultPage'
+import securePage from '../hocs/securePage'
 
 const SeekretPage = () =>
     <div>
@@ -7,4 +8,4 @@ const SeekretPage = () =>
         authenticated users!
     </div>
 
-export default defaultPage(SeekretPage)
+export default securePage(defaultPage(SeekretPage))

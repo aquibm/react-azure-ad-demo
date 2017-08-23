@@ -12,7 +12,10 @@ export default WrappedComponent => {
                 `${window.location.origin}/auth-redirect`
             )
 
-            const postLoginUri = encodeURIComponent(window.location.pathname)
+            const postLoginUri = window.location.pathname.startsWith('/login')
+                ? '/'
+                : window.location.pathname
+            const encodedPostLoginUri = encodeURIComponent(postLoginUri)
 
             const nonce = Math.random().toString(36).substr(2)
             localStorage.setItem('aad.login.nonce', nonce)
@@ -21,7 +24,7 @@ export default WrappedComponent => {
                 .env.REACT_APP_AUTH_TENANT}/oauth2/authorize?client_id=${process
                 .env
                 .REACT_APP_AUTH_CLIENT_ID}&response_type=id_token&redirect_uri=${redirectUri}&scope=openid&response_mode=fragment&nonce=${nonce}&resource=${process
-                .env.REACT_APP_AUTH_CLIENT_ID}&state=${postLoginUri}`
+                .env.REACT_APP_AUTH_CLIENT_ID}&state=${encodedPostLoginUri}`
 
             window.location.href = authUri
         }

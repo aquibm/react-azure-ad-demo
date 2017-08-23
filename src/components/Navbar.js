@@ -12,6 +12,13 @@ const Navbar = ({ isLoggedIn = false, logout }) =>
             </li>
         </ul>
 
+        {!isLoggedIn &&
+            <ul>
+                <li>
+                    <Link to="/login">Login</Link>
+                </li>
+            </ul>}
+
         {isLoggedIn &&
             <ul>
                 <li>

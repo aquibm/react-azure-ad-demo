@@ -6,6 +6,7 @@ import HomePage from './pages/Home'
 import SeekretPage from './pages/Seekret'
 import AuthRedirectPage from './pages/AuthRedirect'
 import SuperSeekretPage from './pages/SuperSeekret'
+import LoginPage from './pages/Login'
 
 const routes = [
     {
@@ -24,6 +25,10 @@ const routes = [
     {
         path: '/s00per-seekret',
         component: SuperSeekretPage
+    },
+    {
+        path: '/login',
+        component: LoginPage
     }
 ]
 

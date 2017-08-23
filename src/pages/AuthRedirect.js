@@ -1,31 +1,33 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import queryParser from 'query-parse'
-import jwtDecode from 'jwt-decode'
+import { decodeToken } from '../feature/auth/authUtils'
+import { login } from '../feature/auth/authActions'
 
 class AuthRedirectPage extends Component {
-    state = {}
-
     componentDidMount() {
-        const hash = window.location.hash.replace('#', '')
+        const hash = this.props.location.hash.replace('#', '')
         const query = queryParser.toObject(hash)
 
         // TOOD(AM): Error page.
-        if (!query.id_token) window.location.href = '/'
+        if (!query.id_token) this.props.history.push('/')
 
-        if (this.isTokenValid(query.id_token))
-            localStorage.setItem('aad.id.token', query.id_token)
+        const decodedToken = decodeToken(query.id_token)
 
-        window.location.href = query.state
+        if (this.isTokenValid(decodedToken.nonce)) {
+            localStorage.setItem('aad.id.token', decodedToken.idToken)
+            localStorage.removeItem('aad.login.nonce')
+
+            this.props.login(decodedToken)
+            this.props.history.push(query.state)
+        }
     }
 
-    isTokenValid(idToken) {
+    isTokenValid(nonce) {
         const expectedNonce = localStorage.getItem('aad.login.nonce')
         if (!expectedNonce) return false
-
-        const decodedJwt = jwtDecode(idToken)
-
-        console.log(decodedJwt)
-        return decodedJwt.nonce === expectedNonce
+        return nonce === expectedNonce
     }
 
     render() {
@@ -33,4 +35,8 @@ class AuthRedirectPage extends Component {
     }
 }
 
-export default AuthRedirectPage
+export default withRouter(
+    connect(null, dispatch => ({
+        login: login.bindTo(dispatch)
+    }))(AuthRedirectPage)
+)

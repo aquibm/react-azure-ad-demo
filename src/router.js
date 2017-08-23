@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import HomePage from './pages/Home'
 import SeekretPage from './pages/Seekret'
 import AuthRedirectPage from './pages/AuthRedirect'
+import SuperSeekretPage from './pages/SuperSeekret'
 
 const routes = [
     {
@@ -19,6 +20,10 @@ const routes = [
     {
         path: '/auth-redirect',
         component: AuthRedirectPage
+    },
+    {
+        path: '/s00per-seekret',
+        component: SuperSeekretPage
     }
 ]
 

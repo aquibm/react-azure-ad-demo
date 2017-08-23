@@ -1,26 +1,27 @@
 {
-  "name": "react-azure-ad-demo",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "jwt-decode": "^2.2.0",
-    "query-parse": "^1.0.0",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "react-redux": "^5.0.6",
-    "react-router": "^4.1.2",
-    "react-router-dom": "^4.1.2",
-    "redux": "^3.7.2",
-    "redux-act": "^1.3.2",
-    "redux-thunk": "^2.2.0"
-  },
-  "devDependencies": {
-    "react-scripts": "1.0.11"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
+    "name": "react-azure-ad-demo",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "jwt-decode": "^2.2.0",
+        "query-parse": "^1.0.0",
+        "react": "^15.6.1",
+        "react-dom": "^15.6.1",
+        "react-redux": "^5.0.6",
+        "react-router": "^4.1.2",
+        "react-router-dom": "^4.1.2",
+        "redux": "^3.7.2",
+        "redux-act": "^1.3.2",
+        "redux-thunk": "^2.2.0"
+    },
+    "devDependencies": {
+        "react-scripts": "1.0.11"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test --env=jsdom",
+        "deploy": "yarn build && cp build/index.html build/200.html && surge build/ react-ad.aquibm.com",
+        "eject": "react-scripts eject"
+    }
 }
